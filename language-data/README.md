@@ -8,14 +8,19 @@ The names of items, blocks and mobs are **not** here. Those come from Minecraft'
 | File | Language |
 |---|---|
 | `en_us.json` | English (the original, every other file is checked against it) |
+| `ar_sa.json` | Arabic |
+| `da_dk.json` | Danish |
 | `de_de.json` | German |
+| `el_gr.json` | Greek |
 | `es_es.json` | Spanish |
+| `fil_ph.json` | Filipino |
 | `fi_fi.json` | Finnish |
 | `fr_fr.json` | French |
 | `hu_hu.json` | Hungarian |
 | `it_it.json` | Italian |
 | `ja_jp.json` | Japanese |
 | `ko_kr.json` | Korean |
+| `nl_nl.json` | Dutch |
 | `no_no.json` | Norwegian |
 | `pl_pl.json` | Polish |
 | `pt_br.json` | Portuguese (Brazil) |
@@ -24,6 +29,8 @@ The names of items, blocks and mobs are **not** here. Those come from Minecraft'
 | `tr_tr.json` | Turkish |
 | `uk_ua.json` | Ukrainian |
 | `zh_cn.json` | Chinese (Simplified) |
+| `zh_tw.json` | Chinese (Traditional) |
+| `zh_hk.json` | Cantonese (Hong Kong, Traditional) |
 
 ## How to help
 
