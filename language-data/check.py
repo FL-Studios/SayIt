@@ -12,6 +12,12 @@ def load(name):
 
 source = load("en_us.json")
 errors = []
+warnings = []
+# Everyday action sentences (swim, ride, eat ...): new, translated language by language. A language without them
+# simply never asks them, so a missing one is only a note, not an error.
+ACTIONS = ("swim", "sprint", "climb", "glide", "horse", "boat", "minecart", "eat", "drink", "cook", "chest", "wake",
+           "place", "break", "meet", "give")
+OPTIONAL = tuple("sayitenglish.s." + a + "." for a in ACTIONS)
 for name in sorted(os.listdir(HERE)):
     if not name.endswith(".json") or name == "en_us.json":
         continue
@@ -29,9 +35,15 @@ for name in sorted(os.listdir(HERE)):
     except ValueError as e:
         errors.append(f"{name}: not valid JSON ({e})")
         continue
+    missing_optional = 0
     for key in source:
         if key not in data:
-            errors.append(f"{name}: missing key {key}")
+            if key.startswith(OPTIONAL):
+                missing_optional += 1
+            else:
+                errors.append(f"{name}: missing key {key}")
+    if missing_optional:
+        warnings.append(f"{name}: {missing_optional} action sentence(s) not translated yet (not asked in this language)")
     for key in data:
         if key not in source:
             errors.append(f"{name}: unknown key {key}")
@@ -39,6 +51,8 @@ for name in sorted(os.listdir(HERE)):
         if key in source and isinstance(text, str):
             if collections.Counter(TOKEN.findall(text)) != collections.Counter(TOKEN.findall(source[key])):
                 errors.append(f"{name}: placeholders of {key} differ from en_us.json (keep %s, %1$s, %% exactly as in the English text)")
+for w in warnings:
+    print("note: " + w)
 for e in errors:
     print(e)
 print("OK" if not errors else f"{len(errors)} problem(s)")
